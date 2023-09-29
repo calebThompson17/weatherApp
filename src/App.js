@@ -86,7 +86,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={weatherIcon} className="App-logo" />
+        <img src={weatherIcon} className="App-logo" alt=''/>
         <h2>Current Weather:</h2>
         <p>
           Temperature: {getCurrentTemp('temp')}
