@@ -6,6 +6,8 @@ function App() {
   const [location, setLocation] = useState(null);
   const [data, setData] = useState(null);
   const [temperature, setTemperature] = useState(null);
+  const [tempType, setTempType] = useState('celsius'); // This is kelvin, celsius, or fahrenheit
+
   const apiKey = 'beb1478e094bd8bf3d03026212ece3bf';
 
   useEffect(() => {
@@ -58,14 +60,38 @@ function App() {
     return ((kelvin - 273.15) * 9/5) + 32;
   }
 
+  const toggleTempType = () => {
+    setTempType(currentTempType => currentTempType === 'celsius'
+      ? 'fahrenheit'
+      : 'celsius');
+  }
+
+  const getCurrentTemp = (tempAttr) => {
+    if (temperature) {
+      const tempAttrValue = temperature[tempAttr];
+      switch (tempType) {
+        case 'kelvin':
+          return `${tempAttrValue.toFixed(2)} K`;
+        case 'celsius':
+          return `${kelvinToCelsius(tempAttrValue).toFixed(2)} °C`;
+        case 'fahrenheit':
+          return `${kelvinToFahrenheit(tempAttrValue).toFixed(2)} °F`;
+        default:
+          return `${kelvinToCelsius(tempAttrValue).toFixed(2)} °C`;
+      }
+    }
+    return 'Loading...';
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h2>Current Weather:</h2>
         <p>
-          Temperature: {kelvinToCelsius(temperature?.temp).toFixed(2)} °C
+          Temperature: {getCurrentTemp('temp')}
         </p>
+        <button onClick={toggleTempType}>Toggle Temperature Unit</button>
       </header>
     </div>
   );
