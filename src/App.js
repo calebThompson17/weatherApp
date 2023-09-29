@@ -73,10 +73,9 @@ function App() {
       switch (tempType) {
         case 'kelvin':
           return `${tempAttrValue.toFixed(2)} K`;
-        case 'celsius':
-          return `${kelvinToCelsius(tempAttrValue).toFixed(2)} °C`;
         case 'fahrenheit':
           return `${kelvinToFahrenheit(tempAttrValue).toFixed(2)} °F`;
+        case 'celsius':
         default:
           return `${kelvinToCelsius(tempAttrValue).toFixed(2)} °C`;
       }
