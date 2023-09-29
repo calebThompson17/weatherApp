@@ -10,8 +10,6 @@ function App() {
   const [tempType, setTempType] = useState('celsius'); // This is kelvin, celsius, or fahrenheit
   const tempTypeOptions = ['kelvin', 'celsius', 'fahrenheit'];
 
-  const apiKey = 'beb1478e094bd8bf3d03026212ece3bf';
-
   useEffect(() => {
     getLocation();
   }, []);
@@ -48,7 +46,7 @@ function App() {
   }
 
   const getWeather = (lat, lon) => {
-    const weatherApiRequest = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    const weatherApiRequest = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`;
     fetch(weatherApiRequest)
       .then(response => response.json())
       .then(json => setData(json))
