@@ -1,6 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
+import Select from './components/Select';
 
 function App() {
   const [location, setLocation] = useState(null);
@@ -8,6 +8,7 @@ function App() {
   const [weatherIcon, setWeatherIcon] = useState('');
   const [temperature, setTemperature] = useState(null);
   const [tempType, setTempType] = useState('celsius'); // This is kelvin, celsius, or fahrenheit
+  const tempTypeOptions = ['kelvin', 'celsius', 'fahrenheit'];
 
   const apiKey = 'beb1478e094bd8bf3d03026212ece3bf';
 
@@ -94,6 +95,12 @@ function App() {
           Temperature: {getCurrentTemp('temp')}
         </p>
         <button onClick={toggleTempType}>Toggle Temperature Unit</button>
+        <Select
+          id={'tempTypeDropDown'}
+          options={tempTypeOptions}
+          value={tempType}
+          onChange={(event) => setTempType(event.target.value)}
+        />
       </header>
     </div>
   );
