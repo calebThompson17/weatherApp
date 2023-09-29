@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 function App() {
   const [location, setLocation] = useState(null);
   const [data, setData] = useState(null);
+  const [weatherIcon, setWeatherIcon] = useState('');
   const [temperature, setTemperature] = useState(null);
   const [tempType, setTempType] = useState('celsius'); // This is kelvin, celsius, or fahrenheit
 
@@ -35,6 +36,7 @@ function App() {
       const newTemperature = kelvin;
       console.log('newTemperature:', newTemperature);
       setTemperature(newTemperature);
+      setWeatherIcon(`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
     }
   }, [data]);
 
@@ -86,7 +88,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={weatherIcon} className="App-logo" />
         <h2>Current Weather:</h2>
         <p>
           Temperature: {getCurrentTemp('temp')}
