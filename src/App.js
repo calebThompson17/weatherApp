@@ -24,7 +24,7 @@ function App() {
 
   useEffect(() => {
     console.log('data:', data);
-    if (data) {
+    if (data?.main) {
       const kelvin = {
         temp: data.main.temp,
         feels_like: data.main.feels_like,
